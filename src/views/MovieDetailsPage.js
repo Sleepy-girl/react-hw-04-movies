@@ -47,7 +47,9 @@ class MovieDetailsPage extends Component {
           </div>
           <div className="details-content-wrapper">
             <h2 className="title">{movie.title}</h2>
-            <span className="user-score">User score: {movie.vote_average}</span>
+            <span className="user-score">
+              User score: {movie.vote_average * 10}%
+            </span>
             <h3 className="over-view-title">Overview</h3>
             <p className="over-view">{movie.overview}</p>
             <h4 className="genres-title">Genres:</h4>
@@ -87,11 +89,11 @@ class MovieDetailsPage extends Component {
         <hr />
         <Switch>
           <Route
-            path={`${match.url}/cast`}
+            path={`${match.path}/cast`}
             render={props => <Cast {...props} movieId={movieId} />}
           />
           <Route
-            path={`${match.url}/reviews`}
+            path={`${match.path}/reviews`}
             render={props => <Reviews {...props} movieId={movieId} />}
           />
         </Switch>

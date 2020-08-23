@@ -9,23 +9,6 @@ class HomePage extends Component {
 
   componentDidMount() {
     moviesApi.fetchMovieTrending().then(movies => this.setState({ movies }));
-
-    // if (this.props.search !== prevProps.search) {
-    //   let moviesObj = {};
-    //   fetch(
-    //     `https://api.themoviedb.org/3/search/movie?api_key=e14194253cce820ed084a34e7bc2e9ec&language=en-US&query=spider&page=1&include_adult=false`,
-    //   )
-    //     .then(res => res.json())
-    //     .then(result => {
-    //       console.log(result);
-    //       moviesObj = result.results;
-    //       return moviesObj;
-    //     })
-    //     .then(
-    //       () => this.setState(moviesObj),
-    //       error => this.setState({ error }),
-    //     );
-    // }
   }
 
   render() {
@@ -34,12 +17,12 @@ class HomePage extends Component {
     return (
       <>
         {movies.length > 0 && (
-          <ul className="trending-list">
+          <ul className="movies-list">
             {movies.map(movie => (
-              <li key={movie.id} className="trending-item">
+              <li key={movie.id} className="movies-item">
                 <NavLink
-                  className="trending-item-link"
-                  activeClassName="trending-item-link-active"
+                  className="movies-item-link"
+                  activeClassName="movies-item-link-active"
                   to={`${match.url}movies/${movie.id}`}
                 >
                   {movie.name}

@@ -34,7 +34,7 @@ const fetchReview = movieId => {
     .get(
       `${baseURL}/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`,
     )
-    .then(response => response.data);
+    .then(response => response.data.results);
 };
 
 export default {

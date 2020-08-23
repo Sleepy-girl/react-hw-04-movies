@@ -35,6 +35,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  width: 1160px;
+  padding: 30px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -54,21 +59,21 @@ code {
   color: red;
 }
 
-/* Trending Movies */
-.trending-list {
+/* Trending Movies & Results of Search*/
+.movies-list {
   padding: 20px;
 }
-.trending-item {
+.movies-item {
   margin-bottom: 6px;
 }
-.trending-item-link {
+.movies-item-link {
   color: blue;
 }
-.trending-item-link:hover,
-.trending-item-link:focus {
+.movies-item-link:hover,
+.movies-item-link:focus {
   color: red;
 }
-.trending-item-link-active {
+.movies-item-link-active {
   color: red;
 }
 /* button */

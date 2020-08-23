@@ -1,5 +1,6 @@
 import React from 'react';
-import { NavLink, Switch, Route } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import routes from '../routes';
 
 function Navigation() {
   return (
@@ -7,7 +8,7 @@ function Navigation() {
       <li>
         <NavLink
           exact
-          to="/"
+          to={routes.home}
           className="Navigation-link"
           activeClassName="Navigation-link-active"
         >
@@ -17,7 +18,7 @@ function Navigation() {
       <li>
         <NavLink
           // exact  // activeClassName будет действовать по четкому совпадению для /movies
-          to="/movies"
+          to={routes.movies}
           className="Navigation-link"
           activeClassName="Navigation-link-active"
         >
