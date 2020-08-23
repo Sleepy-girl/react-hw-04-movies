@@ -69,7 +69,7 @@ class MovieDetailsPage extends Component {
         <ul className="additional-information-list">
           <li className="additional-information-item">
             <NavLink
-              to={`/movies/${movieId}/cast`}
+              to={`${match.url}/cast`}
               activeClassName="additional-information-item-link"
             >
               Cast
@@ -77,7 +77,7 @@ class MovieDetailsPage extends Component {
           </li>
           <li className="additional-information-item">
             <NavLink
-              to={`/movies/${movieId}/reviews`}
+              to={`${match.url}/reviews`}
               activeClassName="additional-information-item-link"
             >
               Reviews
@@ -87,11 +87,11 @@ class MovieDetailsPage extends Component {
         <hr />
         <Switch>
           <Route
-            path={`/movies/${movieId}/cast`}
+            path={`${match.url}/cast`}
             render={props => <Cast {...props} movieId={movieId} />}
           />
           <Route
-            path={`/movies/${movieId}/reviews`}
+            path={`${match.url}/reviews`}
             render={props => <Reviews {...props} movieId={movieId} />}
           />
         </Switch>

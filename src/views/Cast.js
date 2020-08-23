@@ -26,7 +26,11 @@ export class Cast extends Component {
             {casts.map(cast => (
               <li key={cast.credit_id}>
                 {cast.profile_path && (
-                  <img src={cast.profile_path} alt={cast.name} />
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}
+                    alt={cast.name}
+                    width="100"
+                  />
                 )}
                 <h4 className="cast-name">{cast.name}</h4>
                 <span className="cast-character">

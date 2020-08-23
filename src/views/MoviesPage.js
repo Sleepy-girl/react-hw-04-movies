@@ -11,15 +11,22 @@ class MoviesPage extends Component {
   };
 
   componentDidMount() {
+    // const { inpuyValue } = this.state;
     // console.log(this.state.movies);
-    console.log(this.props.location);
-    if (this.props.location.search) {
-      const searchQuery = this.props.location.search;
-      this.fetchMovies(searchQuery);
-    }
+    // console.log(this.props.location);
+    // if (this.props.location.search) {
+    //   const searchQuery = this.props.location.search;
+    //   this.fetchMovies(searchQuery);
+    // }
+    // moviesApi
+    //   .fetchMovieWithQuery('spider')
+    //   .then(movies => this.State({ movies }));
+
+    // moviesApi.fetchMovieWithQuery('spider').then(console.log);
+
     moviesApi
-      .fetchMovieWithQuery(this.state.inputValue)
-      .then(response => response.data.results);
+      .fetchMovieWithQuery('spider')
+      .then(movies => this.setState({ movies }));
   }
 
   // componentDidUpdate(prevProps, prevState) {
@@ -75,29 +82,29 @@ class MoviesPage extends Component {
   //   });
   // };
 
-  handleChange = e => {
-    this.setState({ searchQuery: e.target.value });
-  };
+  // handleChange = e => {
+  //   this.setState({ searchQuery: e.target.value });
+  // };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    // console.log(this.state.searchQuery);
-    this.props.onSubmit(this.state.searchQuery);
-    this.setState({ searchQuery: '' });
-  };
+  // handleSubmit = e => {
+  //   e.preventDefault();
+  //   // console.log(this.state.searchQuery);
+  //   this.props.onSubmit(this.state.searchQuery);
+  //   this.setState({ searchQuery: '' });
+  // };
 
   render() {
     const { movies } = this.state;
-    // const { match } = this.props;
-
+    const { match } = this.props;
+    console.log(movies);
     return (
       <>
         <form className="search-form">
           <input
             className="SearchFormInput"
             type="text"
-            value={this.state.searchQuery}
-            onChange={this.handleChange}
+            // value={this.state.searchQuery}
+            // onChange={this.handleChange}
             // autocomplete="off"
             // autofocus
             placeholder="Search movies"
@@ -111,13 +118,28 @@ class MoviesPage extends Component {
           </button>
         </form>
         ResultsOfSearch
-        <ul>
+        {/* <ul>
           {movies.map(movie => (
             <li key={movie.id}>
-              <NavLink to={`/movie/${movie.id}`}>{movie.name}</NavLink>
+              <NavLink to={`${match.url}/${movie.id}`}>{movie.name}</NavLink>
             </li>
           ))}
-        </ul>
+        </ul> */}
+        {movies.length > 0 && (
+          <ul className="trending-list">
+            {movies.map(movie => (
+              <li key={movie.id} className="trending-item">
+                <NavLink
+                  className="trending-item-link"
+                  activeClassName="trending-item-link-active"
+                  to={`${match.url}movies/${movie.id}`}
+                >
+                  {movie.title}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        )}
       </>
     );
   }

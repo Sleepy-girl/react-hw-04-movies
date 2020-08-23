@@ -8,7 +8,7 @@ const fetchMovieWithQuery = searchQuery => {
     .get(
       `${baseURL}/search/movie?query=${searchQuery}&api_key=${API_KEY}&language=en-US&page=1&include_adult=false`,
     )
-    .then(response => response);
+    .then(response => response.data.results);
 };
 
 const fetchMovieTrending = () => {

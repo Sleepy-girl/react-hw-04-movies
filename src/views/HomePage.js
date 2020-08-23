@@ -40,18 +40,10 @@ class HomePage extends Component {
                 <NavLink
                   className="trending-item-link"
                   activeClassName="trending-item-link-active"
-                  to={`/movies/${movie.id}`}
+                  to={`${match.url}movies/${movie.id}`}
                 >
                   {movie.name}
                 </NavLink>
-                {/* <Switch>
-                <Route
-                  exact
-                  path={`${match.url}/${movie.id}`}
-                  component={MovieDetailsPage}
-                />
-              </Switch> */}
-                {/* <MovieDetailsPage movieId={movie.id} /> */}
               </li>
             ))}
           </ul>

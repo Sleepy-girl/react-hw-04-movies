@@ -15,7 +15,7 @@ export default class Reviews extends Component {
     const reviewsResult = this.state.reviews.results;
     return (
       <>
-        {reviewsResult ? (
+        {!reviewsResult ? (
           <span>We don't have any reviews for this movie.</span>
         ) : (
           <span>...</span>
