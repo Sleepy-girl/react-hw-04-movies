@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { NavLink, Link, Route } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import moviesApi from '../services/moviesApi';
-import ResultsOfSearch from '../components/ResultsOfSearch';
-import routes from '../routes';
-import MovieDetailsPage from './MovieDetailsPage';
 import Searchbox from '../components/Searchbox';
 import getQueryParams from '../utils/getQueryParams';
 
@@ -16,25 +13,16 @@ class MoviesPage extends Component {
     const { query } = getQueryParams(this.props.location.search);
     if (query) {
       console.log('можно фетчить');
+      this.fetchMovies(query);
     }
-    // moviesApi
-    //   .fetchMovieWithQuery('spider')
-    //   .then(movies => this.setState({ movies }));
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.props);
-
     const { query: prevQuery } = getQueryParams(prevProps.location.search);
     const { query: nextQuery } = getQueryParams(this.props.location.search);
 
-    console.log('prevQuery', prevQuery);
-    console.log('nextQuery', nextQuery);
-
     if (prevQuery !== nextQuery) {
-      moviesApi
-        .fetchMovieWithQuery(nextQuery)
-        .then(movies => this.setState({ movies }));
+      this.fetchMovies(nextQuery);
     }
   }
 
@@ -46,20 +34,19 @@ class MoviesPage extends Component {
     });
   };
 
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   // console.log(this.state.searchQuery);
-  //   this.props.onSubmit(this.state.searchQuery);
-  //   this.setState({ searchQuery: '' });
-  // };
+  fetchMovies = query => {
+    moviesApi
+      .fetchMovieWithQuery(query)
+      .then(movies => this.setState({ movies }));
+  };
 
   render() {
     const { movies } = this.state;
     const { match } = this.props;
-    console.log(movies);
+    // console.log(movies);
     return (
       <>
-        <Searchbox inSubmit={this.handleChangeQuery} />
+        <Searchbox onSubmit={this.handleChangeQuery} />
         {movies && (
           <ul className="movies-list">
             {movies.map(movie => (
@@ -67,7 +54,10 @@ class MoviesPage extends Component {
                 <NavLink
                   className="movies-item-link"
                   activeClassName="movies-item-link-active"
-                  to={`${match.url}/${movie.id}`}
+                  to={{
+                    pathname: `${match.url}/${movie.id}`,
+                    state: { from: this.props.location },
+                  }}
                 >
                   {movie.title}
                 </NavLink>

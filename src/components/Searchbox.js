@@ -14,7 +14,7 @@ export class Searchbox extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    this.props.inSubmit(this.state.value);
+    this.props.onSubmit(this.state.value);
     this.setState({ value: '' });
   };
 

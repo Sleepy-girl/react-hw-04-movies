@@ -3,6 +3,7 @@ import { NavLink, Switch, Route } from 'react-router-dom';
 import Cast from './Cast';
 import Reviews from './Reviews';
 import moviesApi from '../services/moviesApi';
+import routes from '../routes';
 
 class MovieDetailsPage extends Component {
   state = {
@@ -14,9 +15,17 @@ class MovieDetailsPage extends Component {
     const movieId = this.props.match.params.movieId;
     moviesApi.fetchMovieDetails(movieId).then(movie => {
       this.setState({ movie });
-      // console.log(movie);
     });
   }
+
+  handleGoBack = () => {
+    // console.log(this.props);
+    // console.log('this.props.location', this.props.location.state.from);
+    if (this.props.location.state && this.props.location.state.from) {
+      return this.props.history.push(this.props.location.state.from);
+    }
+    this.props.history.push(routes.movies);
+  };
 
   render() {
     const { match } = this.props;
@@ -31,7 +40,7 @@ class MovieDetailsPage extends Component {
     return (
       <>
         {}
-        <button type="button" onClick={() => {}} className="go-back">
+        <button type="button" onClick={this.handleGoBack} className="go-back">
           &larr; Go back
         </button>
         <div className="MovieDetailsPage">
