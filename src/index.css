@@ -40,6 +40,7 @@ code {
     monospace;
 }
 
+/* Navogation */
 .Navigation-list {
   display: flex;
   padding: 20px;
@@ -51,4 +52,63 @@ code {
 }
 .Navigation-link-active {
   color: red;
+}
+
+/* Trending Movies */
+.trending-list {
+  padding: 20px;
+}
+.trending-item {
+  margin-bottom: 6px;
+}
+.trending-item-link {
+  color: blue;
+}
+.trending-item-link:hover,
+.trending-item-link:focus {
+  color: red;
+}
+.trending-item-link-active {
+  color: red;
+}
+/* button */
+.go-back {
+  border: 1px solid rgb(129, 126, 126);
+  background-color: rgba(0, 0, 0, 0);
+  width: 100px;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 10px;
+}
+.go-back:hover,
+.go-back:focus {
+  background-color: rgba(11, 115, 251, 0.1);
+}
+/* MovieDetailsPage */
+.MovieDetailsPage {
+  display: flex;
+  justify-content: space-between;
+  width: 630px;
+}
+.details-image {
+  width: 300px;
+  /* margin-right: 30px; */
+}
+.details-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+.title,
+.user-score,
+.over-view-title,
+.over-view,
+.genres-title {
+  margin-bottom: 20px;
+}
+
+/* Search */
+.SearchFormInput {
+  width: 500px;
+  /* margin-right: 2px; */
 }
