@@ -9,6 +9,8 @@ class MovieDetailsPage extends Component {
   state = {
     movies: [],
     movie: {},
+    search: '',
+    from: '',
   };
 
   componentDidMount() {
@@ -16,23 +18,36 @@ class MovieDetailsPage extends Component {
     moviesApi.fetchMovieDetails(movieId).then(movie => {
       this.setState({ movie });
     });
+
+    this.props.location.state?.from &&
+      this.setState({
+        search: this.props.location.state.from.search,
+        from: this.props.location.state.from.pathname,
+      });
   }
 
   handleGoBack = () => {
-    const { location, history, query } = this.props;
-    console.log('location', location);
+    const { location, history } = this.props;
 
-    if (location.state && location.state.from) {
-      return history.push(location.state.from);
-    }
+    history.push(`${this.state.from}${this.state.search}`);
+    // console.log('location', location);
+
+    // if (location.state && location.state.from) {
+    //   return history.push(location.state.from);
+    // }
+    // if (this.state.from) {
+    //   if (this.state.search) {
+    //     history.push(`${this.state.from}${this.state.search}`);
+    //   } else return history.push(this.state.from);
+    // }
     // if (location.state?.from) { //! аналогичная запись, как вверху. проверка с вложенностями
     //   return history.push(location.state.from);
     // }
 
-    this.props.history.push({
-      pathname: routes.movies,
-      state: location,
-    });
+    // this.props.history.push({
+    //   pathname: routes.movies,
+    //   state: location,
+    // });
   };
 
   render() {
