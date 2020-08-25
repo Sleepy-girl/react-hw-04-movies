@@ -19,23 +19,27 @@ class MovieDetailsPage extends Component {
   }
 
   handleGoBack = () => {
-    // console.log(this.props);
-    // console.log('this.props.location', this.props.location.state.from);
-    if (this.props.location.state && this.props.location.state.from) {
-      return this.props.history.push(this.props.location.state.from);
+    const { location, history, query } = this.props;
+    console.log('location', location);
+
+    if (location.state && location.state.from) {
+      return history.push(location.state.from);
     }
-    this.props.history.push(routes.movies);
+    // if (location.state?.from) { //! аналогичная запись, как вверху. проверка с вложенностями
+    //   return history.push(location.state.from);
+    // }
+
+    this.props.history.push({
+      pathname: routes.movies,
+      state: location,
+    });
   };
 
   render() {
-    const { match } = this.props;
+    const { match, location } = this.props;
     const movieId = this.props.match.params.movieId;
     const { movie } = this.state;
-    // const genres = movie.genres;
-    // genres && console.log(genres);
-
-    // genres.map(gender => console.log('gender.name', gender.name));
-    // console.log(this.state.movie);
+    console.log('movie.genres', movie.genres);
 
     return (
       <>
@@ -62,15 +66,15 @@ class MovieDetailsPage extends Component {
             <h3 className="over-view-title">Overview</h3>
             <p className="over-view">{movie.overview}</p>
             <h4 className="genres-title">Genres:</h4>
-            {/* {movie.genres && (
+            {movie.genres && (
               <ul className="genres">
-                Genres: movie.genres.map(
-                <li key={genre.id} className="genre-item">
-                  {genre.name}
-                </li>
-                , ) //! массив с жанрами отказывается перебератся
+                {movie.genres.map(genre => (
+                  <li key={genre.id} className="genre-item">
+                    {genre.name}
+                  </li>
+                ))}
               </ul>
-            )} */}
+            )}
           </div>
         </div>
         <hr />
@@ -80,7 +84,7 @@ class MovieDetailsPage extends Component {
         <ul className="additional-information-list">
           <li className="additional-information-item">
             <NavLink
-              to={`${match.url}/cast`}
+              to={{ pathname: `${match.url}/cast`, state: location.state }}
               activeClassName="additional-information-item-link"
             >
               Cast
@@ -88,7 +92,7 @@ class MovieDetailsPage extends Component {
           </li>
           <li className="additional-information-item">
             <NavLink
-              to={`${match.url}/reviews`}
+              to={{ pathname: `${match.url}/reviews`, state: location.state }}
               activeClassName="additional-information-item-link"
             >
               Reviews

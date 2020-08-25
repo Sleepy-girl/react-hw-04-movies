@@ -18,8 +18,9 @@ class MoviesPage extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    const { location } = this.props;
     const { query: prevQuery } = getQueryParams(prevProps.location.search);
-    const { query: nextQuery } = getQueryParams(this.props.location.search);
+    const { query: nextQuery } = getQueryParams(location.search);
 
     if (prevQuery !== nextQuery) {
       this.fetchMovies(nextQuery);
@@ -27,9 +28,10 @@ class MoviesPage extends Component {
   }
 
   handleChangeQuery = query => {
-    this.props.history.push({
-      // pathname: this.props.location.pathname,
-      ...this.props.location,
+    const { location, history } = this.props;
+    history.push({
+      // pathname: location.pathname,
+      ...location,
       search: `query=${query}`,
     });
   };
@@ -42,8 +44,8 @@ class MoviesPage extends Component {
 
   render() {
     const { movies } = this.state;
-    const { match } = this.props;
-    // console.log(movies);
+    const { match, location } = this.props;
+
     return (
       <>
         <Searchbox onSubmit={this.handleChangeQuery} />
@@ -56,7 +58,7 @@ class MoviesPage extends Component {
                   activeClassName="movies-item-link-active"
                   to={{
                     pathname: `${match.url}/${movie.id}`,
-                    state: { from: this.props.location },
+                    state: { from: location },
                   }}
                 >
                   {movie.title}
